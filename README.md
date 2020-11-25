@@ -7,8 +7,9 @@ Fetching data from REST API and storing it to state is arguably simple, but it i
 
 ## Features
 
-- [ ] Ability to fetch data from remote server once, then cache it for certain amount of time, declaratively.
+- [x] Ability to fetch data from remote server once, then cache it for certain amount of time, declaratively.
 - [ ] Normalize API responses right after fetching the data to avoid data normalization on UI components.
+- [ ] API streaming based on POST API calls.
 
 ## Contributors
 
