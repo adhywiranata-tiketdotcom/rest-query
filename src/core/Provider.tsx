@@ -1,15 +1,13 @@
 import * as React from 'react';
 
-import libContext, { ICoreContextStore } from './core/context';
+import libContext, { ICoreContextStore } from './context';
 
 const ERR_LEADING = '[RESTICACHE ERROR]';
-export { default as useCacheable } from './core/useCacheable';
 
 interface IProps {
   children: React.ReactElement
 }
-
-export function ResticacheProvider({ children }: IProps) {
+function ResticacheProvider({ children }: IProps) {
   const [cacheStore, setCacheStore] = React.useState<ICoreContextStore>({});
 
   /**
@@ -61,3 +59,5 @@ export function ResticacheProvider({ children }: IProps) {
     </libContext.Provider>
   );
 }
+
+export default ResticacheProvider;
