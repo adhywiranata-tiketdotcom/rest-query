@@ -11,8 +11,62 @@ Fetching data from REST API and storing it to state is arguably simple, but it i
 - [ ] Normalize API responses right after fetching the data to avoid data normalization on UI components.
 - [ ] API streaming based on POST API calls.
 
-## Contributors
+## Usage
 
+### Setting Up
+
+Wrap your outermost component with RestQueryProvider which is a [React Context Provider](https://reactjs.org/docs/context.html#contextprovider).
+
+```javascript
+import { RestQueryProvider } from 'tix-rest-query';
+
+function App() {
+  return (
+    <RestQueryProvider>
+      <App />
+    </RestQueryProvider>
+```
+
+### useCacheable
+
+> Fetch API from GET Resource and store the data inside React Context to be persisted until the page refreshes.
+
+⚠️ Browser storage implementation upcoming (local storage / browser-based, non http-only cookie)
+
+```javascript
+const { data, isLoading, error } = useCacheable([REST GET API], [Hook Options]);
+```
+
+__quick example__
+
+```javascript
+import { useCacheable } from 'tix-react-query';
+
+const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokemon/xerneas');
+```
+
+__Hook Options__
+
+|Option|Description|Default Value|
+|---|---|---|
+|key|unique key to name the cache. <br />If null, the key will use the API endpoint as the unique key. <br />The same cache key will override the data|null|
+|cachePolicy|Cache policy strategy, enum between `cache-first`, `network-only`, or `cache-only`. <br />Cache only works only as a Redux replacement (case by case)|`cache-first`|
+
+
+__quick example 2__
+
+```javascript
+import { useCacheable } from 'tix-react-query';
+
+const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokemon/yveltal', { key: 'yveltal', cachePolicy: 'network-only' });
+```
+
+
+### useStreamable
+
+> Fetch streaming API from POST Resource and returns the data as a stack or object structure. COMING SOON
+
+## Contributors
 
 <table>
   <tr>
