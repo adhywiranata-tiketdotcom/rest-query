@@ -7,7 +7,7 @@ const ERR_LEADING = '[RESTICACHE ERROR]';
 interface IProps {
   children: React.ReactElement
 }
-function ResticacheProvider({ children }: IProps) {
+function RestQueryProvider({ children }: IProps) {
   const [cacheStore, setCacheStore] = React.useState<ICoreContextStore>({});
 
   /**
@@ -60,4 +60,4 @@ function ResticacheProvider({ children }: IProps) {
   );
 }
 
-export default ResticacheProvider;
+export default RestQueryProvider;
