@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { useEffectOnce, cacheKeyObfuscator, fetcher } from '../utils';
+import {
+  useEffectOnce,
+  cacheKeyObfuscator,
+  consoleLogger,
+  fetcher,
+} from '../utils';
 
 import libContext from './context';
 
-const WARN_LEADING = '[RESTICACHE WARNING]';
 const WARN_INVALID_OPTION_PROPERTY = (property: string) => `Option [${property}] is not part of the API. While this is not an error, ensure the options matches the API.`;
 
 interface IDataState<T> {
@@ -56,8 +60,7 @@ const mergeOptsDefault = (optsParam: IOptsParam) => {
     if (Object.prototype.hasOwnProperty.call(DEFAULT_OPTS, property)) {
       opts[property] = optsParam[property];
     } else {
-      // eslint-disable-next-line no-console
-      console.warn(WARN_LEADING, WARN_INVALID_OPTION_PROPERTY(property));
+      consoleLogger.warn(WARN_INVALID_OPTION_PROPERTY(property));
     }
   });
 

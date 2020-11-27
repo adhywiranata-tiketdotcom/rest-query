@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { useEffectOnce, fetcher } from '../utils';
+import { useEffectOnce, fetcher, consoleLogger } from '../utils';
 
-const WARN_LEADING = '[RESTICACHE WARNING]';
 const WARN_INVALID_OPTION_PROPERTY = (property: string) => `Option [${property}] is not part of the API. While this is not an error, ensure the options matches the API.`;
 
 const IDENTITY = (data: any) => data;
@@ -73,8 +72,7 @@ const mergeOptsDefault = (optsParam: IOptsParam) => {
     if (Object.prototype.hasOwnProperty.call(DEFAULT_OPTS, property)) {
       opts[property] = optsParam[property];
     } else {
-      // eslint-disable-next-line no-console
-      console.warn(WARN_LEADING, WARN_INVALID_OPTION_PROPERTY(property));
+      consoleLogger.warn(WARN_INVALID_OPTION_PROPERTY(property));
     }
   });
 
@@ -135,12 +133,10 @@ function useStreamable(serviceUrl: string, argOpts = DEFAULT_OPTS) {
         }
       }
 
-      // eslint-disable-next-line no-console
-      console.warn('Stream ended due to stream ending flag is not found or not a proper boolean value');
+      consoleLogger.warn('Stream ended due to stream ending flag is not found or not a proper boolean value');
       return;
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('something went wrong ', e);
+      consoleLogger.err('something went wrong ', e);
     }
   }, [serviceUrl, options, dataState]);
 

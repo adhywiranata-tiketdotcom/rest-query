@@ -10,7 +10,7 @@ export interface ICoreContextStore {
   [cacheDataKey: string]: ICachedData
 }
 
-interface ICoreContextAttrs {
+interface ICoreContextAttributes {
   store: ICoreContextStore
 }
 
@@ -19,6 +19,6 @@ interface ICoreContextMethods {
   setCacheData?(cacheKey: string, data: any): void
 }
 
-type CoreContext = ICoreContextAttrs & ICoreContextMethods
+type CoreContext = ICoreContextAttributes & ICoreContextMethods
 
 export default React.createContext<CoreContext>({ store: null });

@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 import libContext, { ICoreContextStore } from './context';
-
-const ERR_LEADING = '[RESTICACHE ERROR]';
+import { consoleLogger } from '../utils';
 
 interface IProps {
   children: React.ReactElement
@@ -41,8 +40,7 @@ function RestQueryProvider({ children }: IProps) {
       const deserializedData = JSON.parse(cacheStore[cacheKey]?.data);
       return deserializedData;
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(ERR_LEADING, e);
+      consoleLogger.err('something went wrong when deserializing data ', e);
       return null;
     }
   }
