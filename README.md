@@ -1,4 +1,5 @@
-# tix-rest-query
+# Tix Rest Query
+
 Hooks for Fetching, Caching, and Updating RESTful Service Data in React. Heavily Inspired by [React Query](https://github.com/tannerlinsley/react-query) with tiket.com Flight Team use-cases.
 
 ## Motivation
