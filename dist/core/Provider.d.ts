@@ -1,6 +1,6 @@
 import * as React from 'react';
-interface IProps {
+interface RestQueryProps {
     children: React.ReactElement;
 }
-declare function RestQueryProvider({ children }: IProps): JSX.Element;
+declare function RestQueryProvider({ children }: RestQueryProps): JSX.Element;
 export default RestQueryProvider;

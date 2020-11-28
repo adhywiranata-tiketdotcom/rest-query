@@ -1,12 +1,9 @@
-/**
- * Fetcher Engine. Can and should be replaced by any other fetcher
- * Should support POST method and HTTP Call Aborting as well!
- * @param  {string} url
- */
-declare function get(url: string): Promise<any>;
-declare function post(url: string, bodyParams: any): Promise<any>;
-declare const fetcher: {
-    get: typeof get;
-    post: typeof post;
-};
+interface Fetcher {
+    get: (url: string) => Promise<any>;
+    post: (url: string, bodyParams: any) => Promise<any>;
+    put: (url: string, bodyParams: any) => Promise<any>;
+    performDelete: (url: string) => Promise<any>;
+    patch: (url: string, bodyParams: any) => Promise<any>;
+}
+declare const fetcher: Fetcher;
 export default fetcher;

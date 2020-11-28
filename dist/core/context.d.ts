@@ -1,19 +1,19 @@
 import * as React from 'react';
-interface ICachedData {
+interface CachedData {
     data?: string;
     cacheStoredAt?: string;
     cacheExpiredAt?: string;
 }
-export interface ICoreContextStore {
-    [cacheDataKey: string]: ICachedData;
+export interface StoreHashMap {
+    [cacheDataKey: string]: CachedData;
 }
-interface ICoreContextAttrs {
-    store: ICoreContextStore;
+interface CoreContextAttributes {
+    store: StoreHashMap;
 }
-interface ICoreContextMethods {
+interface CoreContextMethods {
     getCachedData?(cacheKey: string): string;
     setCacheData?(cacheKey: string, data: any): void;
 }
-declare type CoreContext = ICoreContextAttrs & ICoreContextMethods;
+export declare type CoreContext = CoreContextAttributes & CoreContextMethods;
 declare const _default: React.Context<CoreContext>;
 export default _default;
