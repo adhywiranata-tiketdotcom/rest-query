@@ -1,16 +1,19 @@
 import * as React from 'react';
 
-import libContext, { ICoreContextStore } from './context';
+import libContext, { StoreHashMap } from './context';
 import { consoleLogger } from '../utils';
 
-interface IProps {
+interface RestQueryProps {
   children: React.ReactElement
 }
-function RestQueryProvider({ children }: IProps) {
-  const [cacheStore, setCacheStore] = React.useState<ICoreContextStore>({});
+
+function RestQueryProvider({ children }: RestQueryProps) {
+  const [cacheStore, setCacheStore] = React.useState<StoreHashMap>({});
 
   /**
-   * set data to cache based on provided cache key or encoded url
+   * Sets provided data to cache depending on the caching storage strategy
+   * @param cacheKey unique key as a reference to the store's hash table
+   * @param data data to cache
    */
   function setCacheData(cacheKey: string, data: any) {
     // serialize data into JSON string to let the data be stored in browser storage or cookies
@@ -29,18 +32,26 @@ function RestQueryProvider({ children }: IProps) {
   }
 
   /**
-   * get data based on provided cache key or encoded url
+   * Returns data stored in the Query Cache
+   * @param cacheKey unique key as a reference to the store's hash table
    */
-  function getCachedData(cacheKey: string) {
+  function getCachedData(cacheKey: string): any {
+    // returns null when requested cache key is not available in the store hash table
     if (!cacheStore[cacheKey]) {
       return null;
     }
 
+    // TODO: implement cache expiration logic before retrieving the data
+
     try {
+      // deserialized the cached data
       const deserializedData = JSON.parse(cacheStore[cacheKey]?.data);
+
       return deserializedData;
     } catch (e) {
+      // returns null when data failed to be deserialized due to unknown reasons
       consoleLogger.err('something went wrong when deserializing data ', e);
+
       return null;
     }
   }
