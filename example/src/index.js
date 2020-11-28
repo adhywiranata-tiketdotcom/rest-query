@@ -4,13 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { RestQueryProvider } from '../../dist';
-
 ReactDOM.render(
   <React.StrictMode>
-    <RestQueryProvider>
-      <App />
-    </RestQueryProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
