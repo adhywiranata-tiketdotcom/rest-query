@@ -63,9 +63,13 @@ const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokem
 ```
 
 
+### useFetchable
+
+> Fetch streaming API with any HTTP Methods and returns the data as a stack or object structure without cache. Docs WIP
+
 ### useStreamable
 
-> Fetch streaming API from POST Resource and returns the data as a stack or object structure. COMING SOON
+> Fetch streaming API from POST Resource and returns the data as a stack or object structure. Docs WIP
 
 ## Contributors
 
