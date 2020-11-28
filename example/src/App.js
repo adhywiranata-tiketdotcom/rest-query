@@ -3,8 +3,9 @@ import { RestQueryProvider } from '../../dist';
 
 import './App.css';
 
-import UseCaseOne from './components/UseCaseOne';
-import UseCaseTwo from './components/UseCaseTwo';
+import Fetchable from './components/Fetchable';
+import Cacheable from './components/Cacheable';
+import Streamable from './components/Streamable';
 
 function OpeningPage() {
   return <h1>Opening Page</h1>
@@ -17,8 +18,9 @@ function Header() {
       <strong>POC Navigation</strong>
       <nav>
         <Link to="/">Home</Link><br />
-        <Link to="/one">Use Case 1: Basic Fetching</Link><br />
-        <Link to="/two">Use Case 2: Data Streaming</Link>
+        <Link to="/fetch">Fetching Without Cache</Link><br />
+        <Link to="/cache">Cacheable Fetching</Link><br />
+        <Link to="/stream">Data Streaming</Link>
       </nav>
     </header>
   );
@@ -34,11 +36,14 @@ function App() {
             <Route exact path="/">
               <OpeningPage />
             </Route>
-            <Route exact path="/one">
-              <UseCaseOne />
+            <Route exact path="/fetch">
+              <Fetchable />
             </Route>
-            <Route exact path="/two">
-              <UseCaseTwo />
+            <Route exact path="/cache">
+              <Cacheable />
+            </Route>
+            <Route exact path="/stream">
+              <Streamable />
             </Route>
           </Switch>
         </BrowserRouter>
