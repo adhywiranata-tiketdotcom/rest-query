@@ -1,15 +1,34 @@
+/*
+Fetcher Engine which contains tipical RESTful HTTP Method operations.
+Only supports client-side fetching and might change its implementation
+depending on the implementation of Abort request and upcoming SSR strategy.
+*/
+
+// Fetcher HTTP object signature
+interface Fetcher {
+  get: (url: string) => Promise<any>
+  post: (url: string, bodyParams: any) => Promise<any>
+  put: (url: string, bodyParams: any) => Promise<any>
+  performDelete: (url: string) => Promise<any>
+  patch: (url: string, bodyParams: any) => Promise<any>
+}
+
 /**
- * Fetcher Engine. Can and should be replaced by any other fetcher
- * Should support POST method and HTTP Call Aborting as well!
- * @param  {string} url
+ * Fetch GET request
+ * @param url service url to fetch from
  */
-async function get(url: string) {
+async function get(url: string):Promise<any> {
   const response = await window.fetch(url);
   const data = await response.json();
   return data;
 }
 
-async function post(url: string, bodyParams: any) {
+/**
+ * Fetch POST request
+ * @param url service url to fetch from
+ * @param bodyParams body to set to POST request
+ */
+async function post(url: string, bodyParams: any):Promise<any> {
   const response = await window.fetch(url, {
     method: 'POST',
     body: JSON.stringify(bodyParams),
@@ -18,7 +37,12 @@ async function post(url: string, bodyParams: any) {
   return data;
 }
 
-async function put(url: string, bodyParams: any) {
+/**
+ * Fetch PUT request
+ * @param url service url to fetch from
+ * @param bodyParams body to set to PUT request
+ */
+async function put(url: string, bodyParams: any):Promise<any> {
   const response = await window.fetch(url, {
     method: 'PUT',
     body: JSON.stringify(bodyParams),
@@ -27,7 +51,11 @@ async function put(url: string, bodyParams: any) {
   return data;
 }
 
-async function performDelete(url: string) {
+/**
+ * Fetch DELETE request
+ * @param url service url to fetch from
+ */
+async function performDelete(url: string):Promise<any> {
   const response = await window.fetch(url, {
     method: 'DELETE',
   });
@@ -35,7 +63,12 @@ async function performDelete(url: string) {
   return data;
 }
 
-async function patch(url: string, bodyParams: any) {
+/**
+ * Fetch PATCH request
+ * @param url service url to fetch from
+ * @param bodyParams body to set to PATCH request
+ */
+async function patch(url: string, bodyParams: any):Promise<any> {
   const response = await window.fetch(url, {
     method: 'PATCH',
     body: JSON.stringify(bodyParams),
@@ -44,7 +77,7 @@ async function patch(url: string, bodyParams: any) {
   return data;
 }
 
-const fetcher = {
+const fetcher: Fetcher = {
   get,
   post,
   put,
