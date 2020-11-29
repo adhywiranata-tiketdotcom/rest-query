@@ -1,6 +1,6 @@
 # Tix Rest Query
 
-Hooks for Fetching, Caching, and Updating RESTful Service Data in React. Heavily Inspired by [React Query](https://github.com/tannerlinsley/react-query) with tiket.com Flight Team use-cases.
+Hooks for Fetching, Caching, and Updating RESTful Service Data in React. Developed and maintained with tiket.com Flight Team use-cases in mind.
 
 ## Motivation
 
@@ -50,7 +50,7 @@ __Hook Options__
 
 |Option|Description|Default Value|
 |---|---|---|
-|key|unique key to name the cache. <br />If null, the key will use the API endpoint as the unique key. <br />The same cache key will override the data|null|
+|key|unique key to name the cache. <br />If null, the key will use the API endpoint as the unique key. <br />The same cache key will override the data|`null`|
 |cachePolicy|Cache policy strategy, enum between `cache-first`, `network-only`, or `cache-only`. <br />Cache only works only as a Redux replacement (case by case)|`cache-first`|
 
 
@@ -62,15 +62,60 @@ import { useCacheable } from 'tix-react-query';
 const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokemon/yveltal', { key: 'yveltal', cachePolicy: 'network-only' });
 ```
 
-
 ### useFetchable
 
-> Fetch streaming API with any HTTP Methods and returns the data as a stack or object structure without cache. Docs WIP
+> Fetch streaming API with any HTTP Methods and returns the data as a stack or object structure without cache.
+
+```javascript
+const { data, isLoading, error } = useCacheable([REST API ENDPOINT], [Hook Options]);
+```
+
+__Hook Options__
+
+|Option|Description|Default Value|
+|---|---|---|
+| httpFetchMethod |HTTP Method for the Rest API. One of `GET`, `POST`, `PUT`,`DELETE` or `PATCH` | `GET`
+| httpFetchBody |Body request for the Rest API. Only for `POST`, `PUT`, or `PATCH` | `null`
+
+```javascript
+import { useFetchable } from 'tix-react-query';
+
+const { data, isLoading, error } = useFetchable('https://pokeapi.co/api/v2/pokemon/yveltal');
+```
 
 ### useStreamable
 
-> Fetch streaming API from POST Resource and returns the data as a stack or object structure. Docs WIP
+> Fetch streaming API from POST Resource and returns the data as a stack or object structure.
 
+```javascript
+import { useStreamable } from 'tix-react-query';
+
+const streamOpts = {
+  streamEndFlag: 'isStreamingDone',
+  reqBodyParamsKey: 'requestIds',
+  initialRequestBodyParams: [1, 2, 3],
+  responseReqBodyExtractorKey: 'requestIds',
+  onStreamEnd: () => console.log('streaming ends...'),
+  onNextTick: () => console.log('next tick'),
+  stackDataMapper: (data) => ({
+    results: data.results,
+  }),
+  stackDataReducer: (data, newData) => ({ results: [...data.results, ...newData.results] }),
+  streamDataFlow: 'OBJECT'
+};
+
+const d = useStreamable('https://mystreamingendpoint.local/streaming', streamOpts);
+```
+
+__Hook Options__
+
+WIP
+
+## Inspirations
+
+[React Query](https://github.com/tannerlinsley/react-query) by TannerLinsley
+[Apollo Client](https://github.com/apollographql/apollo-client) by Apollo GraphQL Team
+[Normalizr](https://github.com/paularmstrong/normalizr) by Paul Armstrong
 ## Contributors
 
 <table>
