@@ -113,9 +113,9 @@ WIP
 
 ## Inspirations
 
-[React Query](https://github.com/tannerlinsley/react-query) by TannerLinsley
-[Apollo Client](https://github.com/apollographql/apollo-client) by Apollo GraphQL Team
-[Normalizr](https://github.com/paularmstrong/normalizr) by Paul Armstrong
+- [React Query](https://github.com/tannerlinsley/react-query) by TannerLinsley
+- [Apollo Client](https://github.com/apollographql/apollo-client) by Apollo GraphQL Team
+- [Normalizr](https://github.com/paularmstrong/normalizr) by Paul Armstrong
 ## Contributors
 
 <table>
