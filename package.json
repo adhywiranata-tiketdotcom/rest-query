@@ -9,7 +9,7 @@
     "dev": "microbundle watch --jsx React.createElement",
     "lint": "eslint src"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^17.0.1"
   },
   "devDependencies": {
