@@ -1,12 +1,12 @@
 import * as React from 'react';
+
 import {
   useEffectOnce,
   cacheKeyObfuscator,
   consoleLogger,
   fetcher,
 } from '../utils';
-
-import libContext from './context';
+import rootContext from './rootContext';
 
 const WARN_INVALID_OPTION_PROPERTY = (property: string) => `Option [${property}] is not part of the API. While this is not an error, ensure the options matches the API.`;
 
@@ -40,13 +40,14 @@ type HookOptionVal = string | boolean | null
 interface IHookOptions {
   key?: string
   cachePolicy: CachePolicy
+  shouldPersist?: boolean
   [optKey: string]: HookOptionVal
 }
 
 const DEFAULT_OPTS: IHookOptions = {
   key: null,
   cachePolicy: CACHE_POLICIES.CACHE_FIRST,
-
+  shouldPersist: false,
 };
 
 interface IOptsParam {
@@ -69,7 +70,7 @@ const mergeOptsDefault = (optsParam: IOptsParam) => {
 
 function useCacheable(serviceUrl: string, argOpts = DEFAULT_OPTS) {
   const options = mergeOptsDefault(argOpts);
-  const ctx = React.useContext(libContext);
+  const ctx = React.useContext(rootContext);
   const serviceCacheKey = options.key;
 
   // Determine the cache key based on user-defined key and fallback to encoded service URL
@@ -107,9 +108,18 @@ function useCacheable(serviceUrl: string, argOpts = DEFAULT_OPTS) {
 
     // set fetched data to cache
     if (isCacheAllowed) {
-      ctx.setCacheData(cacheKey, data);
+      ctx.setCacheData(cacheKey, data, options);
     }
-  }, [isCacheAvailable, isNetworkAllowed, dataState, serviceUrl, isCacheAllowed, ctx, cacheKey]);
+  }, [
+    isCacheAvailable,
+    isNetworkAllowed,
+    dataState,
+    serviceUrl,
+    isCacheAllowed,
+    ctx,
+    cacheKey,
+    options,
+  ]);
 
   useEffectOnce(() => {
     performFetch();
