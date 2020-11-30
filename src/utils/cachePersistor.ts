@@ -17,6 +17,10 @@ abstract class CachePersistor {
   static setStore(persistedCacheStore: StoreHashMap) {
     window.localStorage.setItem(CACHE_PERSISTOR_KEY_PREFIX, JSON.stringify(persistedCacheStore));
   }
+
+  static removeStore() {
+    window.localStorage.removeItem(CACHE_PERSISTOR_KEY_PREFIX);
+  }
 }
 
 export default CachePersistor;
