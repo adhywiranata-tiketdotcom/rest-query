@@ -1,6 +1,6 @@
 import { CachedData, StoreHashMap } from '../interfaces';
 
-const CACHE_PERSISTOR_KEY_PREFIX = 'tix.rest.query.cache';
+const CACHE_PERSISTOR_KEY_PREFIX = 'tix_rest_query_persisted_cache';
 const INITIAL_CACHE_VAL = '{}';
 const storageEngine = window.localStorage;
 
