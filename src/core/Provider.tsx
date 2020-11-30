@@ -2,19 +2,15 @@ import * as React from 'react';
 
 import libContext from './rootContext';
 import { CachedData, StoreHashMap } from '../interfaces';
-import { consoleLogger, CachePersistor, useEffectOnce } from '../utils';
+import { consoleLogger, CachePersistor } from '../utils';
 
 interface RestQueryProps {
   children: React.ReactElement
 }
 
 function RestQueryProvider({ children }: RestQueryProps) {
-  const [cacheStore, setCacheStore] = React.useState<StoreHashMap>({});
-
-  useEffectOnce(() => {
-    // Rehydrate the persisted cache into the cache store once per page load
-    setCacheStore(CachePersistor.getStore());
-  });
+  const persistedCacheStore = CachePersistor.getStore();
+  const [cacheStore, setCacheStore] = React.useState<StoreHashMap>(persistedCacheStore);
 
   /**
    * Sets provided data to cache depending on the caching storage strategy

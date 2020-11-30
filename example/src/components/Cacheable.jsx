@@ -10,7 +10,7 @@ function Pokemon(props) {
 }
 
 function Xerneas() {
-  const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokemon/xerneas');
+  const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokemon/xerneas', { shouldPersist: true });
   console.log('Render <Xerneas />');
   return (
     <div>
@@ -23,7 +23,7 @@ function Xerneas() {
 }
 
 function Yveltal() {
-  const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokemon/yveltal', { key: 'yveltal' });
+  const { data, isLoading, error } = useCacheable('https://pokeapi.co/api/v2/pokemon/yveltal', { key: 'yveltal', shouldPersist: true });
   console.log('Render <Yveltal />');
   return (
     <div>

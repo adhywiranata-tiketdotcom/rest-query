@@ -8,6 +8,7 @@ declare type HookOptionVal = string | boolean | null;
 interface IHookOptions {
     key?: string;
     cachePolicy: CachePolicy;
+    shouldPersist?: boolean;
     [optKey: string]: HookOptionVal;
 }
 declare function useCacheable(serviceUrl: string, argOpts?: IHookOptions): IDataState<any>;
