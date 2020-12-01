@@ -1,5 +1,5 @@
 {
-  "name": "tix-rest-query",
+  "name": "tix-flight-fe-rest-query",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
